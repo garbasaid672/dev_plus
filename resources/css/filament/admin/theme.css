@@ -1,0 +1,42 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+.fi-sidebar {
+    background-color: #0f172a;
+}
+
+.fi-sidebar .fi-sidebar-header {
+    background-color: #0a1020;
+    box-shadow: none;
+}
+
+.fi-sidebar .fi-sidebar-group-label,
+.fi-sidebar .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item-btn > .fi-icon {
+    color: #fff;
+}
+
+.fi-sidebar .fi-sidebar-item-btn:hover,
+.fi-sidebar .fi-sidebar-item-btn:focus-visible,
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    background-color: rgb(255 255 255 / 16%);
+}
+
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon,
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-sidebar-item-label {
+    color: #fff;
+}
+
+/* Boutons de réduction / ouverture de la sidebar */
+.fi-sidebar .fi-icon-btn,
+.fi-sidebar .fi-sidebar-collapse-btn,
+.fi-sidebar .fi-sidebar-open-collapse-sidebar-btn,
+.fi-sidebar .fi-sidebar-close-collapse-sidebar-btn {
+    color: #fff;
+}
+
+.fi-sidebar .fi-icon-btn:hover {
+    background-color: rgb(255 255 255 / 12%);
+}
