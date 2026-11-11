@@ -31,6 +31,13 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('DEV_PLUS')
+            ->colors([
+                'primary' => Color::Blue,
+            ])
+            ->widgets([
+                AccountWidget::class,
+            ])
             ->profile(Parametres::class, isSimple: false)
             ->navigationItems([
                 NavigationItem::make('Paramètres')

@@ -44,6 +44,7 @@ class MessageResource extends Resource
                 TextInput::make('sender_email')->label('E-mail')->disabled(),
                 TextInput::make('subject')->label('Objet')->disabled(),
                 TextInput::make('source')->label('Source')->disabled(),
+                TextInput::make('conversation_id')->label('Téléphone / conversation')->disabled(),
                 Textarea::make('body')
                     ->label('Message reçu')
                     ->rows(6)
@@ -68,6 +69,7 @@ class MessageResource extends Resource
                 TextColumn::make('sender_name')->label('Nom')->searchable(),
                 TextColumn::make('sender_email')->label('E-mail')->searchable(),
                 TextColumn::make('subject')->label('Objet')->searchable(),
+                TextColumn::make('conversation_id')->label('Téléphone / conversation')->searchable(),
                 TextColumn::make('source')->label('Source'),
                 TextColumn::make('status')
                     ->label('Statut')

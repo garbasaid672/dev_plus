@@ -13,6 +13,7 @@ return new class extends Migration
                 $table->string('photo')->nullable();
             });
         }
+        
     }
 
     public function down(): void

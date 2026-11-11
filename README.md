@@ -65,6 +65,12 @@ The welcome message uses `GEMINI_BUSINESS_NAME` (currently `Momo Shop's`). Gemin
 
 Set `GEMINI_API_KEY` and `MESSAGE_INTEGRATION_TOKEN` in the server environment before enabling the integration. `GEMINI_MODEL`, `GEMINI_BUSINESS_NAME`, and `GEMINI_SYSTEM_INSTRUCTION` can be used to configure the model and reply guidance. Messages are retained in the admin inbox if Gemini is unavailable, and can be retried from the Messages menu.
 
+## WhatsApp Business
+
+The assistant can receive WhatsApp text messages through Meta's WhatsApp Cloud API and send its replies back to the same customer. Configure `WHATSAPP_ACCESS_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`, `WHATSAPP_VERIFY_TOKEN`, and `WHATSAPP_APP_SECRET` in the server environment. `WHATSAPP_VERIFY_TOKEN` is a private value you choose; it must match the value entered when configuring the webhook in Meta. The Graph API version defaults to `v26.0` and can be changed with `WHATSAPP_GRAPH_API_VERSION`.
+
+In the Meta developer dashboard, configure the webhook callback URL as `https://your-domain/api/webhooks/whatsapp`, use the same verify token, and subscribe the WhatsApp product to the `messages` field. The server must be publicly reachable over HTTPS. Incoming text and interactive button/list replies are handled; other message types are currently ignored. Run `php artisan migrate` before enabling the webhook so WhatsApp delivery can be tracked and duplicate webhook deliveries do not normally resend an already acknowledged reply.
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

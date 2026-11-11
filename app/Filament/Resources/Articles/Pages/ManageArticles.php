@@ -9,7 +9,7 @@ use Filament\Resources\Pages\ManageRecords;
 class ManageArticles extends ManageRecords
 {
     protected static string $resource = ArticleResource::class;
-
+   // Page 
     protected function getHeaderActions(): array
     {
         return [

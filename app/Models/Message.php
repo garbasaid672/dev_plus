@@ -30,6 +30,7 @@ class Message extends Model
     {
         return [
             'replied_at' => 'datetime',
+            'whatsapp_sent_at' => 'datetime',
         ];
     }
 }

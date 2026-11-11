@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Filament\Resources\Articles;
-
+// Les imports necessaures pour le fonctionnement de la ressources Article
 use App\Filament\Resources\Articles\Pages\ManageArticles;
 use App\Models\Article;
 use BackedEnum;
@@ -21,7 +21,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-
+//Pour la gestion des articles dans l'interface d'administration de Filament, nous definissons la classe ArticleRessource qui etend la classe ressource de filament.
 class ArticleResource extends Resource
 {
     protected static ?string $model = Article::class;
