@@ -3,6 +3,12 @@
 namespace App\Filament\Pages;
 
 use App\Models\Order;
+use App\Models\User;
+use App\Services\WithdrawalService;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
@@ -26,6 +32,53 @@ class Portefeuille extends Page implements HasTable
     protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedWallet;
 
     protected string $view = 'filament.pages.portefeuille';
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('withdraw')
+                ->label('Retirer')
+                ->icon(Heroicon::OutlinedBanknotes)
+                ->modalHeading('Demande de retrait')
+                ->modalDescription(fn (WithdrawalService $withdrawalService): string => 'Solde disponible : '
+                    .number_format($withdrawalService->getAvailableBalance(), 0, ',', ' ').' FCFA')
+                ->form([
+                    TextInput::make('amount')
+                        ->label('Montant (FCFA)')
+                        ->numeric()
+                        ->integer()
+                        ->required()
+                        ->minValue(1000),
+                    Select::make('method')
+                        ->label('Opérateur')
+                        ->options(WithdrawalService::METHODS)
+                        ->required(),
+                    TextInput::make('account_details')
+                        ->label('Numéro de paiement')
+                        ->tel()
+                        ->required(),
+                ])
+                ->action(function (array $data, WithdrawalService $withdrawalService): void {
+                    $user = auth()->user();
+
+                    if (! $user instanceof User) {
+                        abort(401);
+                    }
+
+                    $withdrawalService->create(
+                        $user,
+                        (int) $data['amount'],
+                        $data['method'],
+                        $data['account_details'],
+                    );
+
+                    Notification::make()
+                        ->title('Demande de retrait envoyée')
+                        ->success()
+                        ->send();
+                }),
+        ];
+    }
 
     public function table(Table $table): Table
     {
@@ -79,9 +132,6 @@ class Portefeuille extends Page implements HasTable
             ->emptyStateDescription('Les commandes apparaîtront ici dès leur enregistrement.');
     }
 
-    /**
-     * @return array{confirmedRevenue: float, purchaseTotal: float, orderCount: int}
-     */
     protected function getViewData(): array
     {
         return [
